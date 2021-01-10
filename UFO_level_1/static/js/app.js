@@ -1,12 +1,7 @@
+//Attaching a click event to button
+d3.select('#filter-btn').on('click', populateTable)
 // from data.js
 var tableData = data;
-
-//Date search function
-function filterTable(){
-    var dateTime = d3.select("#datetime").property("value");
-    console.log("text: ", dateTime);
-
-};
 
 //Function to populate date search
 function populateTable(){
@@ -17,6 +12,8 @@ function populateTable(){
     d3.selectAll('#ufo-table tbody tr').remove();
     //For each Row: for each column create column, inster value into column
     tableData.forEach(item => {
+        var datTimeInput = d3.select('#datetime');
+        console.log(datTimeInput.value)
         //create row
         var tRow = tableBody.append("tr");
         // Get the entries for each object in the array
