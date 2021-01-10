@@ -1,19 +1,28 @@
 //Attaching a click event to button
 d3.select('#filter-btn').on('click', populateTable)
-// from data.js
-var tableData = data;
+
+// Create a custom filtering function
+function dataFilter(dataRow) {
+    //Generate value for date box
+    var dateValue = d3.select('#datetime').property('value');
+    if(dateValue == '' || dateValue == dataRow.datetime){
+        return true;
+    }
+    else{
+        return false;
+    }
+};
 
 //Function to populate date search
 function populateTable(){
+    var tableData = data.filter(dataFilter);
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
-    //console.log(tableBody);
     
+    //Reset table
     d3.selectAll('#ufo-table tbody tr').remove();
     //For each Row: for each column create column, inster value into column
     tableData.forEach(item => {
-        var datTimeInput = d3.select('#datetime');
-        console.log(datTimeInput.value)
         //create row
         var tRow = tableBody.append("tr");
         // Get the entries for each object in the array
@@ -23,6 +32,9 @@ function populateTable(){
             //Add values to column
             cell.text(value);
         });
+        console.log('taco')
+        
+        
         
         console.log(item)
     })
