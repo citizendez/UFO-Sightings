@@ -7,29 +7,27 @@ function filterTable(){
     console.log("text: ", dateTime);
 
 };
+
 //Function to populate date search
 function populateTable(){
     //Create table
     var tableUFO = document.getElementById("ufo-table");
     //Create table body 
-    var tableBody = tableUFO.getElementsByTagName("tbody")[0];
+    var tableBody = d3.select('#ufo-table tbody');
     //console.log(tableBody);
-
+    
     //For each Row: for each column create column, inster value into column
     tableData.forEach(item => {
         //create row
-        var tRow = document.createElement("tr");
+        var tRow = tableBody.append("tr");
         // Get the entries for each object in the array
         Object.entries(item).forEach(([key, value]) => {
-            // create column
-            var tcol = document.createElement("td");
-            //isolate data for each column
-            tcol.innerText = value;
-            //append data to row
-            tRow.appendChild(tcol);
+            //Taking a row and adding a column
+            var cell = tRow.append("td");
+            //Add values to column
+            cell.text(value);
         });
-        //append rows to table body
-        tableBody.appendChild(tRow);
+        
         console.log(item)
     })
 };
