@@ -1,38 +1,41 @@
 // from data.js
 var tableData = data;
-//console.log(d3);
 
-// YOUR CODE HERE!
-
-//Create table
-var tableUFO = document.getElementById("ufo-table");
-//Create table body 
-var tableBody = tableUFO.getElementsByTagName("tbody")[0];
-//console.log(tableBody);
-
-//For each Row: for each column create column, inster value into column
-tableData.forEach(item => {
-    //create row
-    var tRow = document.createElement("tr");
-    // Get the entries for each object in the array
-    Object.entries(item).forEach(([key, value]) => {
-        // create column
-        var tcol = document.createElement("td");
-        //isolate data for each column
-        tcol.innerText = value;
-        //append data to row
-        tRow.appendChild(tcol);
-      });
-    //append rows to table body
-    tableBody.appendChild(tRow);
-    console.log(item)
-});
-
+//Date search function
 function filterTable(){
     var dateTime = d3.select("#datetime").property("value");
     console.log("text: ", dateTime);
 
-}
+};
+//Function to populate date search
+function populateTable(){
+    //Create table
+    var tableUFO = document.getElementById("ufo-table");
+    //Create table body 
+    var tableBody = tableUFO.getElementsByTagName("tbody")[0];
+    //console.log(tableBody);
+
+    //For each Row: for each column create column, inster value into column
+    tableData.forEach(item => {
+        //create row
+        var tRow = document.createElement("tr");
+        // Get the entries for each object in the array
+        Object.entries(item).forEach(([key, value]) => {
+            // create column
+            var tcol = document.createElement("td");
+            //isolate data for each column
+            tcol.innerText = value;
+            //append data to row
+            tRow.appendChild(tcol);
+        });
+        //append rows to table body
+        tableBody.appendChild(tRow);
+        console.log(item)
+    })
+};
+
+populateTable();
+
 /*/Input data into table
 tableData.forEach(element => {
     //create column for DATE, isolate date data
