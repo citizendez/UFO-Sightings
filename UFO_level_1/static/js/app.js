@@ -10,12 +10,11 @@ function filterTable(){
 
 //Function to populate date search
 function populateTable(){
-    //Create table
-    var tableUFO = document.getElementById("ufo-table");
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
     //console.log(tableBody);
     
+    d3.selectAll('#ufo-table tbody tr').remove();
     //For each Row: for each column create column, inster value into column
     tableData.forEach(item => {
         //create row
@@ -30,6 +29,7 @@ function populateTable(){
         
         console.log(item)
     })
+    
 };
 
 populateTable();
