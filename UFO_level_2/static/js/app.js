@@ -23,6 +23,11 @@ states.forEach(state => {
     d3.select('#state').append('option').attr('value', state).text(state.toUpperCase());
 });
 
+//Populate shape select
+shapes.forEach(shape => {
+    d3.select('#shape').append('option').attr('value', shape).text(shape.toUpperCase());
+});
+
 // Create a custom filtering function DATE
 function dateFilter(dataRow) {
     //Generate value for date box
@@ -55,6 +60,20 @@ function stateFilter(dataRow) {
     var stateValue = d3.select('#state').property('value');
     //console.log(stateValue)
     if (stateValue == '' || dataRow.state.includes(stateValue))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+
+// Create a custom filtering function SHAPE
+function shapeFilter(dataRow) {
+    //Generate value for date box
+    var shapeValue = d3.select('#shape').property('value');
+    //console.log(stateValue)
+    if (shapeValue == '' || dataRow.shape.includes(shapeValue))
     {
         return true;
     }
