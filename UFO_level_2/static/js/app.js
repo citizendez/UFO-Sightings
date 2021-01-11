@@ -57,12 +57,26 @@ function stateFilter(dataRow) {
     }
 };
 
+// Create a custom filtering function COUNTRY
+function countryFilter(dataRow) {
+    //Generate value for date box
+    var countryValue = d3.select('#country').property('value');
+    if (countryValue == '' || dataRow.country.includes(countryValue))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+
 //Function to populate date search
 function populateTable(){
     //Filters
     var tableData = data.filter(dateFilter);
     tableData = tableData.filter(cityFilter);
     tableData = tableData.filter(stateFilter);
+    tableData = tableData.filter(countryFilter);
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
     
