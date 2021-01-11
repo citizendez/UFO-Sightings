@@ -10,7 +10,13 @@ var states = data.map(function(item) {
     return item.state;
   }).sort();
 states = [...new Set(states)];
-console.log(states)
+
+//Sort shape data 
+var shapes = data.map(function(item) {
+    return item.shape;
+  }).sort();
+states = [...new Set(shapes)];
+console.log(shapes);
 
 //Populate state select
 states.forEach(state => {
