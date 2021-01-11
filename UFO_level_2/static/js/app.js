@@ -1,7 +1,17 @@
-//Attaching a click event to button
+//Events listners
 d3.select('#filter-btn').on('click', populateTable);
 d3.select('#datetime').on('keyup', populateTable);
 d3.select('#city').on('keyup', populateTable);
+d3.select('#state').on('change', populateTable);
+
+//Populate state select
+var states = {}
+data.forEach(element => {
+    if (!(element.state in states)){
+        states[element.state] = element.state.toUpperCase();
+        d3.select('#state').append('option').attr('value', element.state).text(element.state.toUpperCase());
+    }
+});
 
 // Create a custom filtering function DATE
 function dateFilter(dataRow) {
@@ -29,11 +39,26 @@ function cityFilter(dataRow) {
     }
 };
 
+// Create a custom filtering function STATE
+function stateFilter(dataRow) {
+    //Generate value for date box
+    var stateValue = d3.select('#state').property('value');
+    //console.log(stateValue)
+    if (stateValue == '' || dataRow.state.includes(stateValue))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+
 //Function to populate date search
 function populateTable(){
     //Filters
     var tableData = data.filter(dateFilter);
     tableData = tableData.filter(cityFilter);
+    tableData = tableData.filter(stateFilter);
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
     
