@@ -4,13 +4,15 @@ d3.select('#datetime').on('keyup', populateTable);
 d3.select('#city').on('keyup', populateTable);
 d3.select('#state').on('change', populateTable);
 
+var states = data.map(function(item) {
+    return item.state;
+  }).sort();
+states = [...new Set(states)];
+console.log(states)
+
 //Populate state select
-var states = {}
-data.forEach(element => {
-    if (!(element.state in states)){
-        states[element.state] = element.state.toUpperCase();
-        d3.select('#state').append('option').attr('value', element.state).text(element.state.toUpperCase());
-    }
+states.forEach(state => {
+    d3.select('#state').append('option').attr('value', state).text(state.toUpperCase());
 });
 
 // Create a custom filtering function DATE
