@@ -3,7 +3,9 @@ d3.select('#filter-btn').on('click', populateTable);
 d3.select('#datetime').on('keyup', populateTable);
 d3.select('#city').on('keyup', populateTable);
 d3.select('#state').on('change', populateTable);
+d3.select('#country').on('keyup', populateTable);
 
+//Sort state data 
 var states = data.map(function(item) {
     return item.state;
   }).sort();
