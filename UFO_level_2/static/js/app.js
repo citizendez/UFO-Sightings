@@ -1,11 +1,27 @@
 //Attaching a click event to button
-d3.select('#filter-btn').on('click', populateTable)
+d3.select('#filter-btn').on('click', populateTable);
+d3.select('#datetime').on('keyup', populateTable);
+d3.select('#city').on('keyup', populateTable);
 
-// Create a custom filtering function
-function dataFilter(dataRow) {
+// Create a custom filtering function DATE
+function dateFilter(dataRow) {
     //Generate value for date box
     var dateValue = d3.select('#datetime').property('value');
-    if(dateValue == '' || dateValue == dataRow.datetime){
+    if (dateValue == '' || dataRow.datetime.includes(dateValue))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+
+// Create a custom filtering function CITY
+function cityFilter(dataRow) {
+    //Generate value for date box
+    var cityValue = d3.select('#city').property('value');
+    if (cityValue == '' || dataRow.city.includes(cityValue))
+    {
         return true;
     }
     else{
@@ -15,7 +31,9 @@ function dataFilter(dataRow) {
 
 //Function to populate date search
 function populateTable(){
-    var tableData = data.filter(dataFilter);
+    //Filters
+    var tableData = data.filter(dateFilter);
+    tableData = tableData.filter(cityFilter);
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
     
@@ -32,11 +50,11 @@ function populateTable(){
             //Add values to column
             cell.text(value);
         });
-        console.log('taco')
         
         
         
-        console.log(item)
+        
+        //console.log(item)
     })
     
 };
