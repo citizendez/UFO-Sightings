@@ -1,9 +1,9 @@
 //Events listners
-d3.select('#filter-btn').on('click', populateTable);
+d3.select('#filter-btn').on('click', resetButton);
 d3.select('#datetime').on('keyup', populateTable);
 d3.select('#city').on('keyup', populateTable);
 d3.select('#state').on('change', populateTable);
-d3.select('#country').on('keyup', populateTable);
+d3.select('#shape').on('change', populateTable);
 
 //Sort state data 
 var states = data.map(function(item) {
@@ -15,7 +15,7 @@ states = [...new Set(states)];
 var shapes = data.map(function(item) {
     return item.shape;
   }).sort();
-states = [...new Set(shapes)];
+shapes = [...new Set(shapes)];
 console.log(shapes);
 
 //Populate state select
@@ -95,6 +95,18 @@ function countryFilter(dataRow) {
     }
 };
 
+resetButton()
+//Reset function for button
+function resetButton(){
+    d3.select('#state').property('value', '');
+    d3.select('#datetime').property('value', '');
+    d3.select('#city').property('value', '');
+    d3.select('#shape').property('value', '');
+    d3.select('#country').property('value', '');
+    populateTable();
+};
+
+
 //Function to populate date search
 function populateTable(){
     //Filters
@@ -102,6 +114,8 @@ function populateTable(){
     tableData = tableData.filter(cityFilter);
     tableData = tableData.filter(stateFilter);
     tableData = tableData.filter(countryFilter);
+    tableData = tableData.filter(shapeFilter);
+
     //Create table body 
     var tableBody = d3.select('#ufo-table tbody');
     
