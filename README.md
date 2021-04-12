@@ -1,5 +1,5 @@
 # javascript_challenge
-##Automatic Table and Date Search
+## Automatic Table and Date Search
 - Create a basic HTML web page  
 - Using the UFO dataset formed an array of JavaScript objects, wrote code that appends a table to web page and then adds new rows of data for each UFO sighting   
     -  column for date/time, city, state, country, shape, and comment
